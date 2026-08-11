@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RoyalVilla_API.Data;
+using RoyalVilla_API.Models;
+using RoyalVilla_API.Models.DTO;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +16,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
  });
-
+builder.Services.AddAutoMapper(
+    o=>
+    {
+        o.CreateMap<Villa, VillaCreateDTO>().ReverseMap();
+        o.CreateMap<Villa, VillaUpdateDTO>().ReverseMap();
+    });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
