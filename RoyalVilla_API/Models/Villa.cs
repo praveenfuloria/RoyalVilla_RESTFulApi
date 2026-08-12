@@ -20,5 +20,7 @@ namespace RoyalVilla_API.Models
 
         public DateTime? UpdatedDate { get; set; } 
 
+        public ICollection<VillaAmeities>? Ameities { get; set; } = new List<VillaAmeities>();
+
     }
 }
