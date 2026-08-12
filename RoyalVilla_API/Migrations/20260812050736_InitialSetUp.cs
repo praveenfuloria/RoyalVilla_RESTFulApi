@@ -8,18 +8,30 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RoyalVilla_API.Migrations
 {
     /// <inheritdoc />
-    public partial class SeedVillaTableData : Migration
+    public partial class InitialSetUp : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "UpdatedDate",
-                table: "Villa",
-                type: "datetime2",
-                nullable: true,
-                oldClrType: typeof(DateTime),
-                oldType: "datetime2");
+            migrationBuilder.CreateTable(
+                name: "Villa",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Details = table.Column<string>(type: "TEXT", nullable: true),
+                    Rate = table.Column<double>(type: "REAL", nullable: false),
+                    Sqft = table.Column<int>(type: "INTEGER", nullable: false),
+                    Occupancy = table.Column<int>(type: "INTEGER", nullable: false),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Villa", x => x.Id);
+                });
 
             migrationBuilder.InsertData(
                 table: "Villa",
@@ -37,40 +49,8 @@ namespace RoyalVilla_API.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
-                table: "Villa",
-                keyColumn: "Id",
-                keyValue: 1);
-
-            migrationBuilder.DeleteData(
-                table: "Villa",
-                keyColumn: "Id",
-                keyValue: 2);
-
-            migrationBuilder.DeleteData(
-                table: "Villa",
-                keyColumn: "Id",
-                keyValue: 3);
-
-            migrationBuilder.DeleteData(
-                table: "Villa",
-                keyColumn: "Id",
-                keyValue: 4);
-
-            migrationBuilder.DeleteData(
-                table: "Villa",
-                keyColumn: "Id",
-                keyValue: 5);
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "UpdatedDate",
-                table: "Villa",
-                type: "datetime2",
-                nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime2",
-                oldNullable: true);
+            migrationBuilder.DropTable(
+                name: "Villa");
         }
     }
 }

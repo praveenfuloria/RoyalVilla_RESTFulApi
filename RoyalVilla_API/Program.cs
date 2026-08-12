@@ -12,10 +12,14 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//{
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+// });
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
- });
+    options.UseSqlite(
+        builder.Configuration.GetConnectionString("DefaultSQLiteConnection")));
 builder.Services.AddAutoMapper(
     o=>
     {
@@ -37,7 +41,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-//await MigrateDatabase(app);
+await MigrateDatabase(app);
 app.Run();
 
 static async Task MigrateDatabase(WebApplication app)
