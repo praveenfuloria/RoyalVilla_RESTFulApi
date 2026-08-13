@@ -1,25 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RoyalVilla_API.Models
+namespace RoyalVilla_API.Models.DTO
 {
-    public class VillaAmeities
+    public class VillaAmentiesDTO
     {
         [Key]
         public int Id { get; set; }
         [Required]
         [MaxLength(100)]
-        public string Name { get; set; } 
+        public string Name { get; set; }
         public string? Description { get; set; }
-
-        public DateTime CreatedDate { get; set; } 
-
-        public DateTime UpdatedDate { get; set; }
-
         [Required]
-        [ForeignKey(nameof(Villa))]
         public int VillaId { get; set; }
-
-        public Villa? Villa { get; set; } 
+        public string? VillaName { get; set; }
     }
 }
